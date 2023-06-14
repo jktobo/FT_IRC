@@ -6,7 +6,7 @@
 /*   By: joldosh <joldosh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 19:57:50 by dkaratae          #+#    #+#             */
-/*   Updated: 2023/06/14 10:55:44 by joldosh          ###   ########.fr       */
+/*   Updated: 2023/06/15 00:22:08 by joldosh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ void Server::run() {
                     }
                 } else {
                     char buffer[BUFFER_SIZE];
+                    memset(buffer, 0, BUFFER_SIZE);
                     int bytes_received = recv(fds[i].fd, buffer, BUFFER_SIZE - 1, 0);
-
+                    std::cout << "msg: " << buffer;
                     if (bytes_received <= 0) {
                         close(fds[i].fd);
                         clients.erase(fds[i].fd);
@@ -79,8 +80,9 @@ void Server::run() {
                         buffer[bytes_received] = '\0';
                         std::string message(buffer);
 
-                        if (message.substr(0, 9) == "PASSWORD ") {
-                            if (message.substr(9) == password + "\r\n") {
+                        if (message.substr(0, 5) == "PASS ") {
+                            std::cout << "res: " << message.substr(5) << "\n";
+                            if (message.substr(5) == password + "\n") {
                                 clients[fds[i].fd] = "authenticated";
                                 std::string welcome = "Welcome to the IRC server!\r\n";
                                 send(fds[i].fd, welcome.c_str(), welcome.size(), 0);
