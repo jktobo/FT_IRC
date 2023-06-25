@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   channel.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkaratae <dkaratae@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/25 17:41:22 by dkaratae          #+#    #+#             */
+/*   Updated: 2023/06/25 17:44:53 by dkaratae         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHANNEL_HPP
 #define CHANNEL_HPP
 
@@ -7,38 +19,37 @@
 
 class Channel
 {
-public:
-    Channel(std::string channelName, std::string key, Client *client);
-    ~Channel();
+    public:
+        Channel(std::string channelName, std::string key, Client *client);
+        ~Channel();
 
-    void addClient(std::string nickname);
-    void removeClient(std::string nickname); 
-    bool isClientInChannel(std::string nickname);
+        void setTopic(std::string topic);
+        void setKey(std::string key);
 
-    void setTopic(std::string topic);
-    std::string getTopic();
+        std::string getTopic();
+        std::string getKey();
 
-    void setKey(std::string key);
-    std::string getKey();
+        void setInviteOnly(bool inviteOnly);
+        bool isInviteOnly();
 
-    void setInviteOnly(bool inviteOnly);
-    bool isInviteOnly();
+        void setOperator(std::string nickname, bool isOperator);
+        bool isOperator(std::string nickName);
 
-    void setOperator(std::string nickname, bool isOperator);
-    bool isOperator(std::string nickname);
+        void setUserLimit(int limit);
+        int getUserLimit();
 
-    void setUserLimit(int limit);
-    int getUserLimit();
-
-private:
-    std::string name;
-    std::string topic;
-    std::string mode;
-    std::string key;
-    bool inviteOnly;
-    std::vector<std::string> clients;
-    std::vector<std::string> operators;
-    int userLimit;
+        void addClient(std::string nickName);
+        void removeClient(std::string nickName); 
+        bool isClientInChannel(std::string nickName);
+    private:
+        std::string name;
+        std::string topic;
+        std::string mode;
+        std::string key;
+        bool inviteOnly;
+        std::vector<std::string> clients;
+        std::vector<std::string> operators;
+        int userLimit;
 };
 
 #endif

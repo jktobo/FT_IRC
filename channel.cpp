@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   channel.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkaratae <dkaratae@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/25 17:41:28 by dkaratae          #+#    #+#             */
+/*   Updated: 2023/06/25 17:47:40 by dkaratae         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Channel.hpp"
 
 Channel::Channelstd::string channelName, std::string key, Client *client)
@@ -13,27 +25,29 @@ Channel::Channelstd::string channelName, std::string key, Client *client)
 
 Channel::~Channel() {}
 
-void Channel::addClient(std::string nickname)
+void Channel::addClient(std::string nickName)
 {
-    this->clients.push_back(nickname);
+    this->clients.push_back(nickName);
 }
 
-void Channel::removeClient(std::string nickname)
+void Channel::removeClient(std::string nickName)
 {
-    for (int i = 0; i < this->clients.size(); i++) {
-        if (this->clients[i] == nickname) {
+    for (int i = 0; i < this->clients.size(); i++)
+    {
+        if (this->clients[i] == nickName)
+        {
             this->clients.erase(this->clients.begin() + i);
             break;
         }
     }
 }
 
-bool Channel::isClientInChannel(std::string nickname)
+bool Channel::isClientInChannel(std::string nickName)
 {
-    for (int i = 0; i < this->clients.size(); i++) {
-        if (this->clients[i] == nickname) {
+    for (int i = 0; i < this->clients.size(); i++)
+    {
+        if (this->clients[i] == nickName)
             return true;
-        }
     }
     return false;
 }
@@ -78,13 +92,18 @@ bool Channel::isInviteOnly()
     return this->inviteOnly;
 }
 
-void Channel::setOperator(std::string nickname, bool isOperator)
+void Channel::setOperator(std::string nickName, bool isOperator)
 {
-    if (isOperator) {
-        this->operators.push_back(nickname);
-    } else {
-        for (int i = 0; i < this->operators.size(); i++) {
-            if (this->operators[i] == nickname) {
+    if (isOperator)
+    {
+        this->operators.push_back(nickName);
+    }
+    else
+    {
+        for (int i = 0; i < this->operators.size(); i++)
+        {
+            if (this->operators[i] == nickName)
+            {
                 this->operators.erase(this->operators.begin() + i);
                 break;
             }
@@ -92,12 +111,12 @@ void Channel::setOperator(std::string nickname, bool isOperator)
     }
 }
 
-bool Channel::isOperator(std::string nickname)
+bool Channel::isOperator(std::string nickName)
 {
-    for (int i = 0; i < this->operators.size(); i++) {
-        if (this->operators[i] == nickname) {
+    for (int i = 0; i < this->operators.size(); i++)
+    {
+        if (this->operators[i] == nickName)
             return true;
-        }
     }
     return false;
 }
