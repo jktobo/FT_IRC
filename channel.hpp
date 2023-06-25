@@ -3,14 +3,16 @@
 
 #include <string>
 #include <vector>
+#include "Client.hpp"
 
-class Channel {
+class Channel
+{
 public:
-    Channel(std::string name);
+    Channel(std::string channelName, std::string key, Client *client);
     ~Channel();
 
     void addClient(std::string nickname);
-    void removeClient(std::string nickname);
+    void removeClient(std::string nickname); 
     bool isClientInChannel(std::string nickname);
 
     void setTopic(std::string topic);

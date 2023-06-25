@@ -1,21 +1,25 @@
 #include "Channel.hpp"
 
-Channel::Channel(std::string name) {
-    this->name = name;
+Channel::Channelstd::string channelName, std::string key, Client *client)
+{
+    this->name = channelName;
     this->topic = "";
     this->mode = "";
     this->key = "";
     this->inviteOnly = false;
     this->userLimit = -1;
+    operators[0] = client->getName();
 }
 
 Channel::~Channel() {}
 
-void Channel::addClient(std::string nickname) {
+void Channel::addClient(std::string nickname)
+{
     this->clients.push_back(nickname);
 }
 
-void Channel::removeClient(std::string nickname) {
+void Channel::removeClient(std::string nickname)
+{
     for (int i = 0; i < this->clients.size(); i++) {
         if (this->clients[i] == nickname) {
             this->clients.erase(this->clients.begin() + i);
@@ -24,7 +28,8 @@ void Channel::removeClient(std::string nickname) {
     }
 }
 
-bool Channel::isClientInChannel(std::string nickname) {
+bool Channel::isClientInChannel(std::string nickname)
+{
     for (int i = 0; i < this->clients.size(); i++) {
         if (this->clients[i] == nickname) {
             return true;
@@ -33,39 +38,48 @@ bool Channel::isClientInChannel(std::string nickname) {
     return false;
 }
 
-void Channel::setTopic(std::string topic) {
+void Channel::setTopic(std::string topic)
+{
     this->topic = topic;
 }
 
-std::string Channel::getTopic() {
+std::string Channel::getTopic()
+{
     return this->topic;
 }
 
-void Channel::setMode(std::string mode) {
+void Channel::setMode(std::string mode)
+{
     this->mode = mode;
 }
 
-std::string Channel::getMode() {
+std::string Channel::getMode()
+{
     return this->mode;
 }
 
-void Channel::setKey(std::string key) {
+void Channel::setKey(std::string key)
+{
     this->key = key;
 }
 
-std::string Channel::getKey() {
+std::string Channel::getKey()
+{
     return this->key;
 }
 
-void Channel::setInviteOnly(bool inviteOnly) {
+void Channel::setInviteOnly(bool inviteOnly)
+{
     this->inviteOnly = inviteOnly;
 }
 
-bool Channel::isInviteOnly() {
+bool Channel::isInviteOnly()
+{
     return this->inviteOnly;
 }
 
-void Channel::setOperator(std::string nickname, bool isOperator) {
+void Channel::setOperator(std::string nickname, bool isOperator)
+{
     if (isOperator) {
         this->operators.push_back(nickname);
     } else {
@@ -78,7 +92,8 @@ void Channel::setOperator(std::string nickname, bool isOperator) {
     }
 }
 
-bool Channel::isOperator(std::string nickname) {
+bool Channel::isOperator(std::string nickname)
+{
     for (int i = 0; i < this->operators.size(); i++) {
         if (this->operators[i] == nickname) {
             return true;
@@ -87,10 +102,12 @@ bool Channel::isOperator(std::string nickname) {
     return false;
 }
 
-void Channel::setUserLimit(int limit) {
+void Channel::setUserLimit(int limit)
+{
     this->userLimit = limit;
 }
 
-int Channel::getUserLimit() {
+int Channel::getUserLimit()
+{
     return this->userLimit;
 }
