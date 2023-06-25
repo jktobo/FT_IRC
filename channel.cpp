@@ -6,7 +6,7 @@
 /*   By: dkaratae <dkaratae@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 17:41:28 by dkaratae          #+#    #+#             */
-/*   Updated: 2023/06/25 17:47:40 by dkaratae         ###   ########.fr       */
+/*   Updated: 2023/06/25 17:50:10 by dkaratae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,6 @@ Channel::Channelstd::string channelName, std::string key, Client *client)
 
 Channel::~Channel() {}
 
-void Channel::addClient(std::string nickName)
-{
-    this->clients.push_back(nickName);
-}
-
-void Channel::removeClient(std::string nickName)
-{
-    for (int i = 0; i < this->clients.size(); i++)
-    {
-        if (this->clients[i] == nickName)
-        {
-            this->clients.erase(this->clients.begin() + i);
-            break;
-        }
-    }
-}
-
-bool Channel::isClientInChannel(std::string nickName)
-{
-    for (int i = 0; i < this->clients.size(); i++)
-    {
-        if (this->clients[i] == nickName)
-            return true;
-    }
-    return false;
-}
 
 void Channel::setTopic(std::string topic)
 {
@@ -60,16 +34,6 @@ void Channel::setTopic(std::string topic)
 std::string Channel::getTopic()
 {
     return this->topic;
-}
-
-void Channel::setMode(std::string mode)
-{
-    this->mode = mode;
-}
-
-std::string Channel::getMode()
-{
-    return this->mode;
 }
 
 void Channel::setKey(std::string key)
@@ -129,4 +93,31 @@ void Channel::setUserLimit(int limit)
 int Channel::getUserLimit()
 {
     return this->userLimit;
+}
+
+void Channel::addClient(std::string nickName)
+{
+    this->clients.push_back(nickName);
+}
+
+void Channel::removeClient(std::string nickName)
+{
+    for (int i = 0; i < this->clients.size(); i++)
+    {
+        if (this->clients[i] == nickName)
+        {
+            this->clients.erase(this->clients.begin() + i);
+            break;
+        }
+    }
+}
+
+bool Channel::isClientInChannel(std::string nickName)
+{
+    for (int i = 0; i < this->clients.size(); i++)
+    {
+        if (this->clients[i] == nickName)
+            return true;
+    }
+    return false;
 }
